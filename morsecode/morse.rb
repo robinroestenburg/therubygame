@@ -1,11 +1,6 @@
 def morse_to_eng(morse)
   morse_alphabet = Hash[%w(.- -... -.-. -.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- .-. ... - ..- ...- .-- -..- -.-- --..).zip 'A'..'Z']
-  morse.split(/\s{3}/).inject("") do |translation, morse_word|
-    morse_word.split(/\s/).inject(translation) do |translation, morse_code|
-      translation << morse_alphabet[morse_code]
-    end
-    translation << " "
-  end.strip
+  morse.split(/\s{3}/).map { |morse_word| morse_word.split(/\s/).map { |morse_code| morse_alphabet[morse_code]  }.join }.join(" ")
 end
 
 describe 'morse_to_eng(morse)' do
